@@ -890,6 +890,22 @@ namespace UnityEditor.UI
             Selection.activeGameObject = go;
         }
 
+        [MenuItem("GameObject/UI/Extensions/Primitives/Diamond Graph", false)]
+        static public void AddDiamondGraph(MenuCommand menuCommand)
+        {
+            GameObject go = CreateUIElementRoot("Diamond Graph", menuCommand, s_ImageGUIElementSize);
+            go.AddComponent<DiamondGraph>();
+            Selection.activeGameObject = go;
+        }
+		
+		[MenuItem("GameObject/UI/Extensions/Primitives/Cut Corners", false)]
+        static public void AddCutCorners(MenuCommand menuCommand)
+        {
+            GameObject go = CreateUIElementRoot("Cut Corners", menuCommand, s_ImageGUIElementSize);
+            go.AddComponent<UICornerCut>();
+            Selection.activeGameObject = go;
+        }
+
         #endregion
 
         #region Helper Functions
