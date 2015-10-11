@@ -2,6 +2,7 @@
 
 This is an extension project for the new Unity UI system which can be found at:
 [Unity UI Source](https://bitbucket.org/Unity-Technologies/ui)
+##Had some reports of issues with the 5.2.1 patch releases. I'll be looking in to it as soon as I can, for now, keep with the base releases##
 
 #Updated for 5.2 - new asset package#
 
@@ -57,6 +58,8 @@ Control | Description | Menu Command | Component Command | Notes | Credits
 **LineRenderer** | Graphic control for drawing lines in the UI System | UI / Extensions / Primitives / UI Line Renderer | UI / Extensions / Primitives / UI Line Renderer |[tutorial video](https://www.youtube.com/watch?v=OElcWAZGHi0)| jack.sydorenko
 **UILineTextureRenderer** | Graphic control for drawing lines in the UI System | UI / Extensions / Primitives / UI Line Texture Renderer | UI / Extensions / Primitives / UI Line Texture Renderer |[tutorial video](https://www.youtube.com/watch?v=OElcWAZGHi0)| jack.sydorenko, jonbro5556
 **UICircle** | Graphic control for drawing circles in the UI System | UI / Extensions / Primitives / UI Circle | UI / Extensions / Primitives / UI Circle |[tutorial video](https://www.youtube.com/watch?v=2KOnEKAVua0)| zge
+**DiamondGraph** | Graphic control for drawing a diamond in the UI System | UI / Extensions / Primitives / DiamondGraph | UI / Extensions / Primitives / DiamondGraph |5.2+ only [tutorial video](https://www.youtube.com/watch?v=2KOnEKAVua0)| koohddang
+**UICornerCut** | Graphic control for drawing a diamond in the UI System | UI/Extensions/Primitives/Cut Corners | UI/Extensions/Primitives/Cut Corners || Freezy
 
 
 ## Layouts ##
