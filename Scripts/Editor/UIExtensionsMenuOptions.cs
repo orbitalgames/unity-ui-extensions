@@ -157,7 +157,6 @@ namespace UnityEditor.UI
                 GameObjectUtility.SetParentAndAlign(eventSystem, parent);
                 esys = eventSystem.AddComponent<EventSystem>();
                 eventSystem.AddComponent<StandaloneInputModule>();
-                eventSystem.AddComponent<TouchInputModule>();
 
                 Undo.RegisterCreatedObjectUndo(eventSystem, "Create " + eventSystem.name);
             }
@@ -580,7 +579,7 @@ namespace UnityEditor.UI
             inputFieldRT.anchorMin = Vector2.zero;
             inputFieldRT.anchorMax = Vector2.one;
             inputFieldRT.sizeDelta = Vector2.zero;
-            Events.UnityEventTools.AddPersistentListener<string>(inputField.GetComponent<InputField>().onValueChange, new UnityEngine.Events.UnityAction<string>(autoCompleteComboBox.OnValueChanged));
+            Events.UnityEventTools.AddPersistentListener<string>(inputField.GetComponent<InputField>().onValueChanged, new UnityEngine.Events.UnityAction<string>(autoCompleteComboBox.OnValueChanged));
 
             //Setup Overlay
             var overlayRT = overlay.GetComponent<RectTransform>();
@@ -676,7 +675,7 @@ namespace UnityEditor.UI
             inputFieldRT.anchorMin = Vector2.zero;
             inputFieldRT.anchorMax = Vector2.one;
             inputFieldRT.sizeDelta = Vector2.zero;
-            Events.UnityEventTools.AddPersistentListener<string>(inputField.GetComponent<InputField>().onValueChange, new UnityEngine.Events.UnityAction<string>(comboBox.OnValueChanged));
+            Events.UnityEventTools.AddPersistentListener<string>(inputField.GetComponent<InputField>().onValueChanged, new UnityEngine.Events.UnityAction<string>(comboBox.OnValueChanged));
 
             //Setup Overlay
             var overlayRT = overlay.GetComponent<RectTransform>();
