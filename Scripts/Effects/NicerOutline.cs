@@ -8,8 +8,6 @@ namespace UnityEngine.UI.Extensions
 	[AddComponentMenu("UI/Effects/Extensions/Nicer Outline")]
 	public class NicerOutline : BaseMeshEffect
 	{
-		private const int VERTICES_PER_QUAD = 6;
-		
 		[SerializeField]
 		private Color m_EffectColor = new Color (0f, 0f, 0f, 0.5f);
 		
@@ -93,6 +91,10 @@ namespace UnityEngine.UI.Extensions
         {
             UIVertex vt;
 
+            var neededCpacity = verts.Count * 2;
+            if (verts.Capacity < neededCpacity)
+                verts.Capacity = neededCpacity;
+
             for (int i = start; i < end; ++i)
             {
                 vt = verts[i];
@@ -112,25 +114,22 @@ namespace UnityEngine.UI.Extensions
 
         protected void ApplyShadow(List<UIVertex> verts, Color32 color, int start, int end, float x, float y)
         {
+            var neededCpacity = verts.Count * 2;
+            if (verts.Capacity < neededCpacity)
+                verts.Capacity = neededCpacity;
+
             ApplyShadowZeroAlloc(verts, color, start, end, x, y);
         }
 
 
-        public override void ModifyMesh (Mesh mesh)
-		{
-			if (!this.IsActive ())
+        public override void ModifyMesh(VertexHelper vh)
+        {
+            if (!this.IsActive ())
 			{
 				return;
 			}
-			
-			// Initilize a list with the correct capacity, to avoid unneeded allocations later.
-			// The list will hold 9 copies of the vertex data (original + 8 copies).
-            List < UIVertex > verts = new List<UIVertex>(9 * (mesh.vertices.Length / 4 * VERTICES_PER_QUAD));
-            
-			using (var helper = new VertexHelper(mesh))
-            {
-                helper.GetUIVertexStream(verts);
-            }
+            List < UIVertex > verts = new List<UIVertex>();
+            vh.GetUIVertexStream(verts);
 
             Text foundtext = GetComponent<Text>();
 			
@@ -172,11 +171,8 @@ namespace UnityEngine.UI.Extensions
 			count = verts.Count;
 			this.ApplyShadow (verts, this.effectColor, start, verts.Count, 0, -distanceY);
 
-            using (var helper = new VertexHelper())
-            {
-                helper.AddUIVertexTriangleStream(verts);
-                helper.FillMesh(mesh);
-            }
+            vh.Clear();
+            vh.AddUIVertexTriangleStream(verts);
         }
 
 #if UNITY_EDITOR
