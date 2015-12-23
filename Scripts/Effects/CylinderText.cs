@@ -6,7 +6,7 @@ namespace UnityEngine.UI.Extensions
 {
     [RequireComponent(typeof(Text), typeof(RectTransform))]
     [AddComponentMenu("UI/Effects/Extensions/Cylinder Text")]
-    public class CylinderText : BaseVertexEffect
+    public class CylinderText : BaseMeshEffect
     {
         public float radius = 360;
         private RectTransform rectTrans;
@@ -32,26 +32,31 @@ namespace UnityEngine.UI.Extensions
             rectTrans = GetComponent<RectTransform>();
             OnRectTransformDimensionsChange();
         }
-        public override void ModifyVertices(System.Collections.Generic.List<UIVertex> verts)
+        public override void ModifyMesh(Mesh mesh)
         {
-            int count = verts.Count;
+            if (!IsActive())
+                return;
+            Vector3[] verts = mesh.vertices;
+
+            int count = verts.Length;
             if (!IsActive() || count == 0)
             {
                 return;
             }
             for (int index = 0; index < count; index++)
             {
-                UIVertex uiVertex = verts[index];
+                var uiVertex = verts[index];
 
                 // get x position
-                var x = uiVertex.position.x;                
+                var x = uiVertex.x;                
 
                 // calculate bend based on pivot and radius
-                uiVertex.position.z = -radius * Mathf.Cos(x / radius);
-                uiVertex.position.x = radius * Mathf.Sin(x / radius);
+                uiVertex.z = -radius * Mathf.Cos(x / radius);
+                uiVertex.x = radius * Mathf.Sin(x / radius);
                 
                 verts[index] = uiVertex;
             }
+            mesh.vertices = verts;
         }
     }
 }
