@@ -47,7 +47,7 @@ namespace UnityEngine.UI.Extensions
                 for (int i = 0; i < count; i++)
                 {
                     vh.PopulateUIVertex(ref uiVertex, i);
-                    if (!overwriteAllColor && uiVertex.color != targetGraphic.color)
+                    if (!overwriteAllColor && targetGraphic != null && uiVertex.color != targetGraphic.color)
                         continue;
                     uiVertex.color *= Color.Lerp(vertex2, vertex1, ((gradientDir == GradientDir.Vertical ? uiVertex.position.y : uiVertex.position.x) - bottomY) / uiElementHeight);
                     vh.SetUIVertex(uiVertex, i);
@@ -58,7 +58,7 @@ namespace UnityEngine.UI.Extensions
                 for (int i = 0; i < count; i++)
                 {
                     vh.PopulateUIVertex(ref uiVertex, i);
-                    if (!overwriteAllColor && !CompareCarefully(uiVertex.color, targetGraphic.color))
+                    if (!overwriteAllColor && targetGraphic != null && !CompareCarefully(uiVertex.color, targetGraphic.color))
                         continue;
                     switch (gradientDir)
                     {
